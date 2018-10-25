@@ -1,0 +1,10 @@
+C:\Users\Администратор\source\repos\war\war\obj\Debug\war.csprojAssemblyReference.cache
+C:\Users\Администратор\source\repos\war\war\obj\Debug\war.War.resources
+C:\Users\Администратор\source\repos\war\war\obj\Debug\war.Properties.Resources.resources
+C:\Users\Администратор\source\repos\war\war\obj\Debug\war.csproj.GenerateResource.cache
+C:\Users\Администратор\source\repos\war\war\obj\Debug\war.csproj.CoreCompileInputs.cache
+C:\Users\Администратор\source\repos\war\war\bin\Debug\war.exe.config
+C:\Users\Администратор\source\repos\war\war\bin\Debug\war.exe
+C:\Users\Администратор\source\repos\war\war\bin\Debug\war.pdb
+C:\Users\Администратор\source\repos\war\war\obj\Debug\war.exe
+C:\Users\Администратор\source\repos\war\war\obj\Debug\war.pdb
