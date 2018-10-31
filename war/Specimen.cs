@@ -28,6 +28,20 @@ namespace war
         public Ill ill = null;//болеет этой болезнью
         static int MV = 2;//величина мутации
         public int MutateChanse=50;//шанс мутации новой особи
+        public static int maxPop = 200; //Максимальный размер популяции
+
+        public static int CountLived()//счтаем жывых
+        {
+            int lived = 0;
+            for(int i= 0; i< Life.LS.Count(); i++ )
+            {
+                if (Life.LS[i].live)
+                    lived++;
+            }
+
+            return lived;
+            
+        }
 
         public Specimen(int immun, int maxAge, int sex, int health, int x, int y, int MutateChanse, int freqReproduse, int speed )//конструктор
         {

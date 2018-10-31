@@ -49,53 +49,65 @@ namespace war
 
         }
 
+
        static void ReproduseFinal() //размножаем всех
         {
             Specimen newS = null;
-
+            
             int n = LS.Count();
-            if (Specimen.typeOfReproduse > 1)
+            int pop = Specimen.CountLived();
+            if (pop < Specimen.maxPop)
             {
-                for (int i = 0; i < n; i++)
+                if (Specimen.typeOfReproduse > 1)
                 {
-                    for (int j = 0; j < n; j++)
+                    for (int i = 0; i < n; i++)
                     {
-                        if (LS[i].wantReproduse && LS[j].wantReproduse)
-                            newS = LS[i].TryReproduseGetero(LS[j]);
+                        for (int j = 0; j < n; j++)
+                        {
+                            if (LS[i].wantReproduse && LS[j].wantReproduse)
+                                newS = LS[i].TryReproduseGetero(LS[j]);
+
+                            if (newS != null)
+                            {
+                                LS.Add(newS);
+                                LS[i].wantReproduse = false;
+                                LS[j].wantReproduse = false;
+                                if (Specimen.CountLived() > Specimen.maxPop)
+                                    break;
+                            }
+                        }
+
+                        if (LS[i].wantReproduse && LS[i].sex == 1 && Specimen.typeOfReproduse == 3)
+                            newS = LS[i].ReproduseGomo();
 
                         if (newS != null)
                         {
                             LS.Add(newS);
                             LS[i].wantReproduse = false;
-                            LS[j].wantReproduse = false;
+                            if (Specimen.CountLived() > Specimen.maxPop)
+                                break;
                         }
-                    }
-
-                    if (LS[i].wantReproduse && LS[i].sex==1 && Specimen.typeOfReproduse ==3 )
-                        newS = LS[i].ReproduseGomo();
-
-                    if (newS != null)
-                    {
-                        LS.Add(newS);
-                        LS[i].wantReproduse = false;
+                        if (Specimen.CountLived() > Specimen.maxPop)
+                            break;
                     }
                 }
-            }
-            else
-            {
-                for (int i = 0; i < n; i++)
+                else
                 {
-                    if (LS[i].wantReproduse)
-                        newS = LS[i].ReproduseGomo();
-
-                    if (newS != null)
+                    for (int i = 0; i < n; i++)
                     {
-                        LS.Add(newS);
-                        LS[i].wantReproduse = false;
+                        if (LS[i].wantReproduse)
+                            newS = LS[i].ReproduseGomo();
+
+                        if (newS != null)
+                        {
+                            LS.Add(newS);
+                            LS[i].wantReproduse = false;
+                        }
+                        if (Specimen.CountLived() > 200)
+                            break;
                     }
                 }
             }
-
         }
 
        static void Infect()//Заражение популяции

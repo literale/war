@@ -377,12 +377,12 @@
             // tbRepDist
             // 
             this.tbRepDist.Location = new System.Drawing.Point(3, 77);
-            this.tbRepDist.Maximum = 250;
+            this.tbRepDist.Maximum = 100;
             this.tbRepDist.Minimum = 1;
             this.tbRepDist.Name = "tbRepDist";
             this.tbRepDist.Size = new System.Drawing.Size(189, 45);
             this.tbRepDist.TabIndex = 1;
-            this.tbRepDist.Value = 125;
+            this.tbRepDist.Value = 75;
             // 
             // splitter1
             // 
@@ -669,7 +669,7 @@
             this.tbpd.Name = "tbpd";
             this.tbpd.Size = new System.Drawing.Size(38, 20);
             this.tbpd.TabIndex = 33;
-            this.tbpd.Text = "2";
+            this.tbpd.Text = "10";
             // 
             // tbmci
             // 
@@ -677,7 +677,7 @@
             this.tbmci.Name = "tbmci";
             this.tbmci.Size = new System.Drawing.Size(38, 20);
             this.tbmci.TabIndex = 32;
-            this.tbmci.Text = "2";
+            this.tbmci.Text = "25";
             // 
             // tbs
             // 
@@ -685,7 +685,7 @@
             this.tbs.Name = "tbs";
             this.tbs.Size = new System.Drawing.Size(38, 20);
             this.tbs.TabIndex = 31;
-            this.tbs.Text = "2";
+            this.tbs.Text = "25";
             // 
             // tbc
             // 
@@ -701,7 +701,7 @@
             this.tbd.Name = "tbd";
             this.tbd.Size = new System.Drawing.Size(38, 20);
             this.tbd.TabIndex = 27;
-            this.tbd.Text = "10";
+            this.tbd.Text = "5";
             // 
             // tbDistInfect
             // 
