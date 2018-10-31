@@ -327,7 +327,7 @@ namespace war
 
         public void getWantReproduse()//начать сезон спаривания
         {
-            //int tmp = GetProb(this.freqReproduse, 12);
+           // int tmp = GetProb(this.freqReproduse, 12);
             Random r = new Random();
             int rand = r.Next(0, 101);
             int prob = (this.freqReproduse / 12) * 100;
@@ -344,9 +344,14 @@ namespace war
             
             if (realDist<=reproduseDistanse && this.sex!=secondParent.sex)
             {
-                //int tmp = GetProb(this.quality, secondParent.quality);//отбор партнера по качеству
-               // if (tmp > 0)
+                int tmp = 1;
+               //int tmp = GetProb(this.quality, secondParent.quality);//отбор партнера по качеству
+                if (tmp > 0)
+                {
                     nSpecimen = this.ReproduseGetero(ref secondParent);
+                    this.wantReproduse = false;
+                    secondParent.wantReproduse = false;
+                }
 
             }
             return nSpecimen;

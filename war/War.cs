@@ -271,45 +271,48 @@ namespace war
                 g.Clear(Color.Black);
                 for (int i = 0; i < Life.LS.Count; i++)
                 {
-                    Brush rC = magenta;
-                    int sex = Life.LS[i].sex;
-                    switch (sex)
+                    if (Life.LS[i].live)
                     {
-                        case 1:
-                            if (Life.LS[i].isSick)
-                            { rC = browm; }
-                            else
-                            { rC = red; }
-                            break;
-                        case 2:
-                            if (Life.LS[i].isSick)
-                            {
-                                rC = mBlue;
-                            }
-                            else
-                            {
-                                rC = blue;
-                            }
-                            break;
-                        case 3:
-                            if (Life.LS[i].isSick)
-                            {
-                                rC = magenta;
-                            }
-                            else
-                            {
-                                rC = dMagente;
-                            }
-                            break;
+                        Brush rC = magenta;
+                        int sex = Life.LS[i].sex;
+                        switch (sex)
+                        {
+                            case 1:
+                                if (Life.LS[i].isSick)
+                                { rC = browm; }
+                                else
+                                { rC = red; }
+                                break;
+                            case 2:
+                                if (Life.LS[i].isSick)
+                                {
+                                    rC = mBlue;
+                                }
+                                else
+                                {
+                                    rC = blue;
+                                }
+                                break;
+                            case 3:
+                                if (Life.LS[i].isSick)
+                                {
+                                    rC = magenta;
+                                }
+                                else
+                                {
+                                    rC = dMagente;
+                                }
+                                break;
 
+                        }
+
+                        int x1 = Life.LS[i].x - Specimen.radius;
+                        int x2 = Life.LS[i].x + Specimen.radius;
+                        int y1 = Life.LS[i].y - Specimen.radius;
+                        int y2 = Life.LS[i].y + Specimen.radius;
+                        int d = Specimen.radius * 2;
+                        g.FillEllipse(rC, x1, y1, d, d);
                     }
-
-                    int x1 = Life.LS[i].x - Specimen.radius;
-                    int x2 = Life.LS[i].x + Specimen.radius;
-                    int y1 = Life.LS[i].y - Specimen.radius;
-                    int y2 = Life.LS[i].y + Specimen.radius;
-                    int d = Specimen.radius * 2;
-                    g.FillEllipse(rC, x1, y1, d, d);
                 }
 
 

@@ -72,7 +72,7 @@ namespace war
             isSick.Add(cSick);
             maxWay.Add(mMaxWay);
             MutateChanse.Add(mMutaeChanse);
-            number.Add(LS.Count());
+            number.Add(n);
         }
         override public void SaveStatistic()
         {

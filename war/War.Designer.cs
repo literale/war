@@ -377,12 +377,12 @@
             // tbRepDist
             // 
             this.tbRepDist.Location = new System.Drawing.Point(3, 77);
-            this.tbRepDist.Maximum = 100;
+            this.tbRepDist.Maximum = 250;
             this.tbRepDist.Minimum = 1;
             this.tbRepDist.Name = "tbRepDist";
             this.tbRepDist.Size = new System.Drawing.Size(189, 45);
             this.tbRepDist.TabIndex = 1;
-            this.tbRepDist.Value = 75;
+            this.tbRepDist.Value = 125;
             // 
             // splitter1
             // 

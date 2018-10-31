@@ -53,33 +53,49 @@ namespace war
         {
             Specimen newS = null;
 
+            int n = LS.Count();
             if (Specimen.typeOfReproduse > 1)
             {
-                for (int i = 0; i < LS.Count(); i++)
+                for (int i = 0; i < n; i++)
                 {
-                    for (int j = 0; j < LS.Count(); j++)
+                    for (int j = 0; j < n; j++)
                     {
                         if (LS[i].wantReproduse && LS[j].wantReproduse)
                             newS = LS[i].TryReproduseGetero(LS[j]);
+
+                        if (newS != null)
+                        {
+                            LS.Add(newS);
+                            LS[i].wantReproduse = false;
+                            LS[j].wantReproduse = false;
+                        }
                     }
 
                     if (LS[i].wantReproduse && LS[i].sex==1 && Specimen.typeOfReproduse ==3 )
                         newS = LS[i].ReproduseGomo();
+
+                    if (newS != null)
+                    {
+                        LS.Add(newS);
+                        LS[i].wantReproduse = false;
+                    }
                 }
             }
             else
             {
-                for (int i = 0; i < LS.Count(); i++)
+                for (int i = 0; i < n; i++)
                 {
                     if (LS[i].wantReproduse)
                         newS = LS[i].ReproduseGomo();
+
+                    if (newS != null)
+                    {
+                        LS.Add(newS);
+                        LS[i].wantReproduse = false;
+                    }
                 }
             }
 
-            if (newS != null)
-            {
-                LS.Add(newS);
-            }
         }
 
        static void Infect()//Заражение популяции
