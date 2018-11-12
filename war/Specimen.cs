@@ -29,7 +29,8 @@ namespace war
         static int MV = 2;//величина мутации
         public int MutateChanse=50;//шанс мутации новой особи
         public static int maxPop = 200; //Максимальный размер популяции
-
+        
+        //Данная вспомогательная функция считает живых особей
         public static int CountLived()//счтаем жывых
         {
             int lived = 0;
@@ -42,7 +43,9 @@ namespace war
             return lived;
             
         }
-
+        //Это конструктор класса Spesimen
+        //Ему передается - иммуните, максимальный возраст, который может достичь данная особь, пол, координаты
+        //Шанс что он(вернее его потомок) мутирует, расстояние, на котором она может найти партнера и скорость
         public Specimen(int immun, int maxAge, int sex, int health, int x, int y, int MutateChanse, int freqReproduse, int speed )//конструктор
         {
             this.immun = immun;
@@ -55,6 +58,8 @@ namespace war
             maxWay = speed;
         }
 
+        //Данная функция двигает особь на случайное расстониие в промежутке [-maxWay; maxWay]
+        //по вертикали или по горизонтали
         public void Move(int fX, int fY)//движение особи
         {
             Random way = new Random();
@@ -81,10 +86,12 @@ namespace war
                         y = 1;
                     break;
 
-            }
-            getWantReproduse();
+            }            
         }
 
+        //Данная функция предназначена для мутации новой, тольо появившейся особи
+        //она случайно решает с некоторым шансом (переданным от родителей), мутирует она или нет,
+        //и случайным образом выбирает, какой параметр изменится и на сколько
         public void Mutate()//мутация новой особи
         {
             Random r = new Random();
@@ -151,7 +158,10 @@ namespace war
                 }
             }  
         }
-
+        
+        //Данная функция предназначена для излечения особи лекарствами. Вызывается стахастическая функция определения,
+        //какое из дыух событий (излечение или не излечение) случится и, если особь излечивается,
+        //ее болезнь обнуляется и она приобретает дополнительный иммунитет 
         public void TreatDrugs()//излечить особь лекарством
         {        
             int tmp = GetProb(Drugs.strong, this.ill.strong);
@@ -175,17 +185,22 @@ namespace war
             }
         }
 
+        
+        //Данная функция отвечает за излечение больной особи силами иммунитета
+        //Если эта болезнь не наследственная - вызывая стохастическая функция выбора события
+        //(шансы которых зависсят от силы иммунитета и болезни)
+        //и если выпало событие излечиться - болезнь обнуляется, а у особи появляется дополнительный иммунитет
         void TreatImun()//излечиться силами иммунитета
         {
             if (Ill.typePass != 1)
             { 
-            int tmp = GetProb(this.immun + this.dopimmun, this.ill.strong);
-            if (tmp > 0)
-            {
-                dopimmun += 5;
-                this.isSick = false;
-                this.ill = null;
-            }
+                int tmp = GetProb(this.immun + this.dopimmun, this.ill.strong);
+                if (tmp > 0)
+                {
+                    dopimmun += 5;
+                    this.isSick = false;
+                    this.ill = null;
+                }
 
                 if (tmp == 0)
                 {
@@ -201,6 +216,12 @@ namespace war
             }
         }
 
+        //Даннная функция отвечает за заражение особи от другой особи. 
+        //Для этого вызывается стохастическая функция, которая решает,
+        //заразится особь или нет
+        //в зависимости от заразности болезни и иммунитета особи
+        //Если особь заражается - она получает мутировавшую копию болезни о соседа
+        //А болезнь добавляется в список болезней
         public void TryBeginSick(Ill ill)//заразить особь
         {
             int tmp = GetProb(ill.contagation, this.immun);
@@ -223,7 +244,11 @@ namespace war
                 }
             }
         }
-
+        
+        //Данная функция предназначена для решения, произойдет некоторое событие или нет
+        //первым аргуметом идет шанс события, которое мы хотим
+        //вторым - которое мы не хотим
+        //Сумма шансов может быть больше 100, поскольку итоговый шанс = меньшийШанс/БольшийШанс
         static public int GetProb(int wantIT, int DontWantIT)//вспомогательная функция подсчета вероятности, сверху вероятность события, которого мы ожидаем
         {
             int tmp = 0;
@@ -246,22 +271,18 @@ namespace war
                         tmp = -1;
                     else
                         tmp = 1;
-
                 }
                 if (wantIT > DontWantIT)
-                {
-                  
-                    prob = Convert.ToInt32((wantIT / DontWantIT) * 50);
+                {                
+                    prob = Convert.ToInt32((DontWantIT / wantIT) * 100);
                     int rand = r.Next(0, 101);
                     tmp = prob - rand;
                     int t = r.Next(1, 10);
                     System.Threading.Thread.Sleep(t);//чтобы генератор успел замениться
-
-
                 }
                 if (DontWantIT > wantIT)
                 {                    
-                    prob = Convert.ToInt32((DontWantIT / wantIT) * 50);
+                    prob = Convert.ToInt32((wantIT / DontWantIT) * 100);
                     int rand = r.Next(0, 101);
                     tmp = rand - prob;
                     int t = r.Next(1, 10);
@@ -271,7 +292,10 @@ namespace war
             
             return tmp;
         }
-
+        //Данная функция предназначена для размножения двух особей.
+        //Особь-ребенок имеет параметры, равные средним параметрам родителей, но измнененные мутацией
+        //Так же, если особь больна - она попытается заразить партнера
+        //если больна мать - она попытается заразить ребенка
         Specimen ReproduseGetero(ref Specimen secondParent)//размножиться с партнером
         {
             this.wantReproduse = false;
@@ -290,13 +314,13 @@ namespace war
             Specimen newS = new Specimen(immun, maxAge,sex, health, x, y, MutateChanse, freqReproduse, speed);
             newS.maxWay = freqReproduse;
             newS.Mutate();
-            if (this.isSick)//заражение партнера
+            if (this.isSick && secondParent.ill == null)//заражение партнера
             {
                 secondParent.TryBeginSick(this.ill);
             }
             else
             {
-                if (secondParent.isSick)
+                if (secondParent.isSick && this.ill == null)
                     this.TryBeginSick(secondParent.ill);
             }  
             //заражение ребенка
@@ -308,11 +332,11 @@ namespace war
             {
                 newS.TryBeginSick(secondParent.ill);
             }
-
-
             return newS;
         }
-
+        
+        //Данная функция предназначена для бесполого размножения особи. 
+        //Она создает копию материнской особи, а затем мутирует ее
         public Specimen ReproduseGomo()//создать свою копию
         {
             this.wantReproduse = false;
@@ -332,13 +356,13 @@ namespace war
             newS.Mutate();
                if (this.isSick)
                {
-
-                newS.TryBeginSick(this.ill);
+              newS.TryBeginSick(this.ill);
             }
-
             return newS;
         }
+        
 
+        //Данная функция предназначена для начала сезона спаривания
         public void getWantReproduse()//начать сезон спаривания
         {
            // int tmp = GetProb(this.freqReproduse, 12);
@@ -349,7 +373,9 @@ namespace war
             if (tmp >= 0)
                 this.wantReproduse = true;
         }
-
+        
+        //Данная фукция предназначена для попытки спариться двух особей
+        //Попытка успешна, если особи разного пола и находятся на расстонии, меньше максимального расстония поиска партнера
         public Specimen TryReproduseGetero(Specimen secondParent)//попытаться размножиться с партнером
         {
             Specimen nSpecimen = null;
@@ -366,11 +392,13 @@ namespace war
                     this.wantReproduse = false;
                     secondParent.wantReproduse = false;
                 }
-
             }
             return nSpecimen;
         }
 
+        //Данная функция предназначена для частных итеративных изменений.
+        //Это: старение, смерть от старости, попытки излечиться силами иммунитета
+        //ослабевание от болезни, смерть от болезни, начало сезона спаривания
         public void Iteration()//итеративные изменения
         {
             this.age = age + 1;
@@ -390,7 +418,6 @@ namespace war
                         this.maxWay = maxWay - 1;
                     if (maxWay < 1)
                         maxWay = 1;
-
                     
                     tmp = this.ill.deadly;//Понижение привлекательности зависит от болезни
                     int n = Convert.ToInt32(tmp/2);
@@ -398,7 +425,6 @@ namespace war
                     this.quality = quality - n;
                     if (this.quality < 0)
                         this.quality = 0;
-
                 }
             }
             if (health <= 0)
@@ -409,10 +435,6 @@ namespace war
             {
                 getWantReproduse();
             }
-
         }
-
-
-
     }
 }
