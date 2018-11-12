@@ -7,9 +7,9 @@ namespace war
     abstract class Statistic
     {
         public List<int> number = new List<int>();
-        abstract public void GetStatistic();
-        abstract public void SaveStatistic();
-        abstract public void PrintStatistic();
+        abstract public void GetStatistic();//Собрать статистику
+        abstract public void SaveStatistic();//Сохранить статистику
+        
     }
 
     class StatisticSpisemen : Statistic
@@ -22,7 +22,8 @@ namespace war
         public List<double> maxWay = new List<double>();//максимальный путь, который пройдет особь за итерацию
         public List<double> MutateChanse = new List<double>();//шанс мутации новой особи
 
-        
+        //Данная функция собирает текущую статистику, а именно средние значения по популяции в лист сатистики
+        //где хранится вся статистика по эксперименту
         override public void  GetStatistic()
         {
             List<Specimen> LS = Life.LS;
@@ -70,6 +71,7 @@ namespace war
             MutateChanse.Add(mMutaeChanse);
             number.Add(n);
         }
+        //Данная функция сохраняет всю собранную статистику в xlsx файл
         override public void SaveStatistic()
         {
             // Создаём экземпляр нашего приложения
@@ -125,17 +127,9 @@ namespace war
                     workSheet.Cells[8, j] = MutateChanse[j - 2];
                 }
 
-
             excelApp.DisplayAlerts = false;
             workSheet.SaveAs(string.Format(@"{0}\Статистика_популяция.xlsx", System.Environment.CurrentDirectory));
-
             excelApp.Quit();
-
-
-        }
-        override public void PrintStatistic()
-        {
-            
         }
     }
 
@@ -146,7 +140,9 @@ namespace war
         public List<double> strong = new List<double>();//Сила, сопротивление лечению и выздоровлению
         public List<double> passDict = new List<double>();//расстояние. на котором передается болезнь при передаче воздушно-капельным путем
         public List<double> MutateChanse = new List<double>();//шанс мутации болезни
-
+        
+        //Данная функция собирает текущую статистику, а именно средние значения по болезни в лист сатистики
+        //где хранится вся статистика по эксперименту
         override public void GetStatistic()
         {
             List<Ill> LI = Life.LI;
@@ -180,6 +176,7 @@ namespace war
 
         }
 
+        //Данная функция сохраняет всю собранную статистику в xlsx файл
         override public void SaveStatistic()
         {
 
@@ -221,15 +218,9 @@ namespace war
             {
                 workSheet2.Cells[5, j] = MutateChanse[j - 2];
             }
-
             excelApp2.DisplayAlerts = false;
             workSheet2.SaveAs(string.Format(@"{0}\Статистика_болезнь.xlsx", System.Environment.CurrentDirectory));
-
             excelApp2.Quit();
-        }
-        override public void PrintStatistic()
-        {
-
         }
     }
 }
