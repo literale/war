@@ -30,6 +30,7 @@ namespace war
 
         }
 
+        //Выбор типа размножения
         private void rbGOmo_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -47,33 +48,30 @@ namespace war
             Specimen.typeOfReproduse = 3;
         }
 
+        //Выбор типа передачи
         private void rbGen_CheckedChanged(object sender, EventArgs e)
         {
-
             Ill.typePass = 1;
         }
 
         private void rbAir_CheckedChanged(object sender, EventArgs e)
         {
-
             Ill.typePass = 3;
         }
 
         private void rbCont_CheckedChanged(object sender, EventArgs e)
         {
-
             Ill.typePass = 2;
         }
 
         private void rbSex_CheckedChanged(object sender, EventArgs e)
         {
-
             Ill.typePass = 4;
         }
-
+        //Данная функция отвечает за работу кнопки Старт. Если можель уже запущена и была нажата кнопка Пауза - 
+        // можель просто начинает работу, иначе она считывает данные, генерирует популяцию и заражает ее
         private void btnStart_Click(object sender, EventArgs e)
         {
-
             if (!started)
             {
                 try
@@ -101,7 +99,7 @@ namespace war
             }
 
         }
-
+        //Данная функция считывает некоторые данные с экрана, генерирует популяцию и болезнь, и блокирует ввод новых данных
         void LoadData()
         {
             int nIll = Convert.ToInt32(tbIllSp.Text);
@@ -112,20 +110,18 @@ namespace war
             }
             GenereteSpecimen();
             GenereteIll();
-            // time = Convert.ToInt32(tbTime.Text);
             if (time != 0)
                 time = Convert.ToInt32(1000 / time);
             else
                 time = 200;
 
-            Drugs.strong = Convert.ToInt32(tbDrugs.Text);
-           
+            Drugs.strong = Convert.ToInt32(tbDrugs.Text);           
             panel2.Enabled = false;
             tbSize.Enabled = false;
             tbIllSp.Enabled = false;
 
         }
-
+        //Данная функция считывает данные о популяции с экрана и генерирует популяцию
         public void GenereteSpecimen()//Генерируем популяцию
         {
             int nSP = Convert.ToInt32(tbSize.Text);//размер популяции
@@ -172,17 +168,13 @@ namespace war
                 newS = new Specimen(nI, nMA, sex, nH, nx, ny, nMC, nrd, nSpeed);
                 newS.maxWay = nrd;
                 Life.LS.Add(newS);
-
-
                 Random r1 = new Random();
                 int t = r1.Next(1, 50);
                 System.Threading.Thread.Sleep(t);//чтобы генератор успел змениться
-
             }
-
-
         }
 
+        //Данная функция считывает данные о болезни с экрана и генерирует болезни и первые nIll особей заражаются болезнью)
         public void GenereteIll()//Генерируем болезни
         {
             int deadly = tbDead.Value;//смертоносность
@@ -232,25 +224,22 @@ namespace war
                 Random r1 = new Random();
                 int t = r1.Next(1, 50);
                 System.Threading.Thread.Sleep(t);//чтобы генератор успел змениться
-
             }
-
-
         }
         private void Field_Paint(object sender, PaintEventArgs e)
         {
 
         }
-
+        //Кнопка пауза, позволяет очистить модель и сохранить статистику
         private void btnPause_Click(object sender, EventArgs e)
         {
             _pause = true;
             btnDel.Enabled = true;
             btnStatistic.Enabled = true;
         }
+        //Основная функция работы модели. Отрисовывает особей и вызывает итеративные изменения
         public void Play()
         {
-
             Brush black = System.Drawing.Brushes.Black;
             Brush green = System.Drawing.Brushes.Green;
             Brush red = System.Drawing.Brushes.Red;
@@ -259,9 +248,7 @@ namespace war
             Brush mBlue = System.Drawing.Brushes.MidnightBlue;
             Brush magenta = System.Drawing.Brushes.Magenta;
             Brush dMagente = System.Drawing.Brushes.DarkMagenta;
-
             Graphics g = pictureBox1.CreateGraphics();
-            // time = Convert.ToInt32(tbTime.Text);
             if (time != 0)
                 time = Convert.ToInt32(1000 / time);
             else
@@ -303,9 +290,7 @@ namespace war
                                     rC = dMagente;
                                 }
                                 break;
-
                         }
-
                         int x1 = Life.LS[i].x - Specimen.radius;
                         int x2 = Life.LS[i].x + Specimen.radius;
                         int y1 = Life.LS[i].y - Specimen.radius;
@@ -314,22 +299,17 @@ namespace war
                         g.FillEllipse(rC, x1, y1, d, d);
                     }
                 }
-
-
                 Life.Iteration();
                 PrintSt();
-
-
-                //System.Threading.Thread.Sleep(time);
             }
         }
-
+        //Кнопка, которая отвечает за лечение болезни лекарствами
         private void btnDrugs_Click(object sender, EventArgs e)
         {
             Drugs.strong = Convert.ToInt32(tbDrugs.Text);
             Life.TreatDrugs();
         }
-
+        //Кнопка отвечающая за стирание данных
         private void btnDel_Click(object sender, EventArgs e)
         {
             _pause = true;
@@ -344,14 +324,16 @@ namespace war
             Graphics g = pictureBox1.CreateGraphics();
             g.Clear(Color.Black);
             started = false;
+            Life.SI = new StatisticIll();
+            Life.SS= new StatisticSpisemen();
         }
-
+        //Кнопка, которая сохраняет статистику в xslx файлы
         private void btnStatistic_Click(object sender, EventArgs e)
         {
             Life.SI.SaveStatistic();
             Life.SS.SaveStatistic();
         }
-
+        //Функция, отвечающая за вывод текущих средних значений по популяции и болезни на экран
         public void PrintSt()
         {
             int n = Life.SS.health.Count() - 1;
