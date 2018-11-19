@@ -9,3 +9,14 @@ C:\Users\Администратор\source\repos\war\war\bin\Debug\war.pdb
 C:\Users\Администратор\source\repos\war\war\obj\Debug\war.exe
 C:\Users\Администратор\source\repos\war\war\obj\Debug\war.pdb
 C:\Users\Администратор\source\repos\war\war\obj\Debug\war.csproj.ResolveComReference.cache
+D:\учеба\война\war\war\bin\Debug\war.exe.config
+D:\учеба\война\war\war\bin\Debug\war.exe
+D:\учеба\война\war\war\bin\Debug\war.pdb
+D:\учеба\война\war\war\obj\Debug\war.csprojAssemblyReference.cache
+D:\учеба\война\war\war\obj\Debug\war.csproj.ResolveComReference.cache
+D:\учеба\война\war\war\obj\Debug\war.War.resources
+D:\учеба\война\war\war\obj\Debug\war.Properties.Resources.resources
+D:\учеба\война\war\war\obj\Debug\war.csproj.GenerateResource.cache
+D:\учеба\война\war\war\obj\Debug\war.csproj.CoreCompileInputs.cache
+D:\учеба\война\war\war\obj\Debug\war.exe
+D:\учеба\война\war\war\obj\Debug\war.pdb

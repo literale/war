@@ -889,7 +889,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Data);
             this.Name = "War";
-            this.Text = "Form1";
+            this.Text = "War";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Data.ResumeLayout(false);
             this.Data.PerformLayout();

@@ -339,6 +339,8 @@ namespace war
             tbIllSp.Enabled = true;
             Life.LI.Clear();
             Life.LS.Clear();
+            Life.SI = new StatisticIll();
+            Life.SS = new StatisticSpisemen();
             Graphics g = pictureBox1.CreateGraphics();
             g.Clear(Color.Black);
             started = false;
@@ -355,19 +357,23 @@ namespace war
             int n = Life.SS.health.Count() - 1;
 
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            try
+            {
+                label19.Text = "Средний иммунитет = " + Life.SS.immun[n];
+                label20.Text = "Среднее здоровье  = " + Life.SS.health[n];
+                label21.Text = "Частота мутаций = " + Life.SS.MutateChanse[n];
+                label27.Text = "Всего особей = " + Life.SS.number[n];
+                label28.Text = "Заражено особей = " + Life.SS.isSick[n];
 
-            label19.Text = "Средний иммунитет = " + Life.SS.immun[n];
-            label20.Text = "Среднее здоровье  = " + Life.SS.health[n];
-            label21.Text = "Частота мутаций = " + Life.SS.MutateChanse[n];
-            label27.Text = "Всего особей = " + Life.SS.number[n];
-            label28.Text = "Заражено особей = " + Life.SS.isSick[n];
-
-            n = Life.SI.deadly.Count() - 1;
-            label22.Text = "Смертаность = " + Life.SI.deadly[n];
-            label23.Text = "Заразность = " + Life.SI.contagation[n];
-            label24.Text = "Сила = " + Life.SI.strong[n];
-            label25.Text = "Частота мутаций = " + Life.SI.MutateChanse[n];
-            label26.Text = "Расстояние передачи = " + Life.SI.passDict[n];
+                n = Life.SI.deadly.Count() - 1;
+                label22.Text = "Смертаность = " + Life.SI.deadly[n];
+                label23.Text = "Заразность = " + Life.SI.contagation[n];
+                label24.Text = "Сила = " + Life.SI.strong[n];
+                label25.Text = "Частота мутаций = " + Life.SI.MutateChanse[n];
+                label26.Text = "Расстояние передачи = " + Life.SI.passDict[n];
+            }
+            catch (IndexOutOfRangeException)
+            { }
         }
 
         private void label26_Click(object sender, EventArgs e)

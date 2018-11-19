@@ -84,45 +84,45 @@ namespace war
                 workSheet.Cells[1, 1] = "Размер популяции";
                 for (int j = 2; j <= number.Count() + 1; j++)
                 {
-                    workSheet.Cells[1, j] = number[j - 2];
+                    workSheet.Cells[j, 1] = number[j - 2];
                 }
 
-                workSheet.Cells[2, 1] = "Ср иммунитет";
+                workSheet.Cells[1, 2] = "Ср иммунитет";
                 for (int j = 2; j <= immun.Count() + 1; j++)
                 {
-                    workSheet.Cells[2, j] = immun[j - 2];
+                    workSheet.Cells[j, 2] = immun[j - 2];
                 }
 
-                workSheet.Cells[3, 1] = "Ср Максимальный возраст";
+                workSheet.Cells[1, 3] = "Ср Максимальный возраст";
                 for (int j = 2; j <= maxAge.Count() + 1; j++)
                 {
-                    workSheet.Cells[3, j] = maxAge[j - 2];
+                    workSheet.Cells[j, 3] = maxAge[j - 2];
                 }
 
-                workSheet.Cells[4, 1] = "Ср возраст";
+                workSheet.Cells[1, 4] = "Ср возраст";
                 for (int j = 2; j <= age.Count() + 1; j++)
                 {
-                    workSheet.Cells[4, j] = age[j - 2];
+                    workSheet.Cells[j, 4] = age[j - 2];
                 }
-                workSheet.Cells[5, 1] = "Ср здоровье";
+                workSheet.Cells[1, 5] = "Ср здоровье";
                 for (int j = 2; j <= health.Count() + 1; j++)
                 {
-                    workSheet.Cells[5, j] = health[j - 2];
+                    workSheet.Cells[j, 5] = health[j - 2];
                 }
-                workSheet.Cells[6, 1] = "Больных";
+                workSheet.Cells[1, 6] = "Больных";
                 for (int j = 2; j <= isSick.Count() + 1; j++)
                 {
-                    workSheet.Cells[6, j] = isSick[j - 2];
+                    workSheet.Cells[j, 6] = isSick[j - 2];
                 }
-                workSheet.Cells[7, 1] = "Ср макс путь";
+                workSheet.Cells[1, 7] = "Ср макс путь";
                 for (int j = 2; j <= maxWay.Count() + 1; j++)
                 {
-                    workSheet.Cells[7, j] = maxWay[j - 2];
+                    workSheet.Cells[j, 7] = maxWay[j - 2];
                 }
-                workSheet.Cells[8, 1] = "Ср шан мутации";
+                workSheet.Cells[1, 8] = "Ср шан мутации";
                 for (int j = 2; j <= MutateChanse.Count() + 1; j++)
                 {
-                    workSheet.Cells[8, j] = MutateChanse[j - 2];
+                    workSheet.Cells[j, 8] = MutateChanse[j - 2];
                 }
 
 
@@ -195,31 +195,31 @@ namespace war
             workSheet2.Cells[1, 1] = "Ср Смерт";
             for (int j = 2; j <= deadly.Count() + 1; j++)
             {
-                workSheet2.Cells[1, j] = deadly[j - 2];
+                workSheet2.Cells[j, 1] = deadly[j - 2];
             }
 
-            workSheet2.Cells[2, 1] = "Ср заразность";
+            workSheet2.Cells[1, 2] = "Ср заразность";
             for (int j = 2; j <= contagation.Count() + 1; j++)
             {
-                workSheet2.Cells[2, j] = contagation[j - 2];
+                workSheet2.Cells[j, 2] = contagation[j - 2];
             }
 
-            workSheet2.Cells[3, 1] = "Ср сила";
+            workSheet2.Cells[1, 3] = "Ср сила";
             for (int j = 2; j <= strong.Count() + 1; j++)
             {
-                workSheet2.Cells[3, j] = strong[j - 2];
+                workSheet2.Cells[j, 3] = strong[j - 2];
             }
 
-            workSheet2.Cells[4, 1] = "Ср расстояние передачи";
+            workSheet2.Cells[1, 4] = "Ср расстояние передачи";
             for (int j = 2; j <= passDict.Count() + 1; j++)
             {
-                workSheet2.Cells[4, j] = passDict[j - 2];
+                workSheet2.Cells[j, 4] = passDict[j - 2];
             }
 
-            workSheet2.Cells[5, 1] = "Ср шан мутации";
+            workSheet2.Cells[1, 5] = "Ср шан мутации";
             for (int j = 2; j <= MutateChanse.Count() + 1; j++)
             {
-                workSheet2.Cells[5, j] = MutateChanse[j - 2];
+                workSheet2.Cells[j, 5] = MutateChanse[j - 2];
             }
 
             excelApp2.DisplayAlerts = false;
